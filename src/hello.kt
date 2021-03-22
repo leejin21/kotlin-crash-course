@@ -51,8 +51,65 @@ fun main(){
         }
     }
     
-
     print10Numbers()
+
+    val y1 = isEven(5)
+    val y2 = isEven()
+    println(y1)
+    println(y2)
+    val y = 3
+    println(y.isOdd())
+
+    // val dog = Dog()
+    // dog.bark()
+
+    // val bear = object : Animal(name: "Camembear"){
+    //     // anonymous function
+    //     override fun makeSound(){
+    //         println("Rooooooar!")
+    //     }
+    // }
+    val number1 = readLine() ?: "0"
+    val parsedNum = try {
+        number1.toInt()
+    } catch (e: Exception) {
+        0
+    }
+    println(parsedNum)
+
+    println("===lambda functions===")
+    // not write return문 inside the curly braces
+    val list = listOf("Kotlin", "is", "fun")
+    val count = list.count{currentString -> 
+        currentString.length == 3
+    }
+    println(count)
+    val ccount = list.customCount{currentString -> 
+        currentString.length >= 3
+    }
+    println(ccount)
+    
+}
+
+fun List<String>.customCount(function: (String) -> Boolean): Int {
+    var counter = 0
+    for (string in this) {
+        if(function(string)) {
+            counter ++
+        }
+    }
+    return counter
+}
+
+// generic 이용한 버전
+fun <T> List<T>.customCount2(function: (T) -> Boolean) : Int {
+    var counter = 0
+    for (string in this){
+        if (function(string)){
+            counter++
+        }
+    }
+    return counter++
 }
 
 // * function basic
@@ -65,6 +122,34 @@ fun print10Numbers(){
 
 // * function params and return
 // get Int type param, return Boolean type data
-fun isEven(number: Int): Boolean{
+fun isEven(number: Int = 10): Boolean{
     return number % 2 == 0
 }
+
+// extension function of type
+fun Int.isOdd(): Boolean {
+    return this% 2 == 1
+}
+
+// class Animal(
+//     val name: String,
+//     // val legCount: Int = 4
+// ){
+//     init{
+//         println("hello my name is $name")
+//     }
+
+//     abstract fun makeSound(){}
+// }
+
+// class Dog: Animal(name: "Dog"){
+//     fun bark(){
+//         println("WUFF!")
+//     }
+// }
+
+// class Cat: Animal(name: "Cat"){
+//     fun meow(){
+//     println("meow")
+//     }
+// }
